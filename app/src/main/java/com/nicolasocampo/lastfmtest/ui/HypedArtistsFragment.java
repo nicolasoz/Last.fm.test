@@ -11,9 +11,15 @@ import android.view.ViewGroup;
 
 import com.nicolasocampo.lastfmtest.R;
 import com.nicolasocampo.lastfmtest.domain.Artist;
+import com.nicolasocampo.lastfmtest.io.LastFmApiAdapter;
+import com.nicolasocampo.lastfmtest.io.model.HypedArtistsResponse;
 import com.nicolasocampo.lastfmtest.ui.adapter.HypedArtistAdapter;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Nicolás on 20/07/2016.
@@ -22,7 +28,7 @@ public class HypedArtistsFragment extends Fragment {
 
     public static final int NUM_COLUMNS = 2;
 
-    public static final String LOG_TAG = HypedArtistsFragment.class.getSimpleName();
+    public static final String LOG_TAG = HypedArtistsFragment.class.getName();
 
     private RecyclerView mHypedArtistsList;
     private HypedArtistAdapter adapter;
@@ -46,6 +52,25 @@ public class HypedArtistsFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Call<HypedArtistsResponse> call = LastFmApiAdapter.getApiService().getHypedArtists();
+        call.enqueue(new Callback<HypedArtistsResponse>() {
+            @Override
+            public void onResponse(Call<HypedArtistsResponse> call, Response<HypedArtistsResponse> response) {
+                adapter.addAll(response.body().getArtists());
+            }
+
+            @Override
+            public void onFailure(Call<HypedArtistsResponse> call, Throwable t) {
+
+                t.printStackTrace();
+            }
+        });
+    }
+
     private void setupArtistsList()
     {
         mHypedArtistsList.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLUMNS));
@@ -61,4 +86,5 @@ public class HypedArtistsFragment extends Fragment {
         }
         adapter.addAll(artists);
     }
+
 }
