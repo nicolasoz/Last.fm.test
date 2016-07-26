@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.nicolasocampo.lastfmtest.R;
 import com.nicolasocampo.lastfmtest.domain.Artist;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -39,6 +40,12 @@ public class HypedArtistAdapter extends RecyclerView.Adapter<HypedArtistAdapter.
     public void onBindViewHolder(HypedArtistViewHolder holder, int position) {
         Artist currentArtist = artists.get(position);
         holder.setArtistName(currentArtist.getName());
+
+        if (currentArtist.getUrlMediumImage() !=null)
+            holder.setArtistImage(currentArtist.getUrlMediumImage());
+
+        else
+            holder.setArtistDefaultImage();
     }
 
     @Override
@@ -46,13 +53,13 @@ public class HypedArtistAdapter extends RecyclerView.Adapter<HypedArtistAdapter.
         return artists.size();
     }
 
-    public void addAll(@NonNull ArrayList<Artist> artists){
+    public void addAll(ArrayList<Artist> artists){
         if (artists == null)
-            throw  new NullPointerException("The items cannon be null");
+            throw  new NullPointerException("The items cannot be null");
 
 
         this.artists.addAll(artists);
-        notifyItemRangeInserted(getItemCount() - 1, artists.size());
+        notifyDataSetChanged();
     }
 
     public class HypedArtistViewHolder extends RecyclerView.ViewHolder
@@ -71,5 +78,18 @@ public class HypedArtistAdapter extends RecyclerView.Adapter<HypedArtistAdapter.
         public void setArtistName (String name) {
             artistName.setText(name);
         }
+
+        public void setArtistImage (String url){
+            Picasso.with(context)
+                    .load(url)
+                    .placeholder(R.drawable.artist_placeholder)
+                    .into(artistImage);
+        }
+
+        public void setArtistDefaultImage(){
+        Picasso.with(context)
+                .load(R.drawable.artist_placeholder)
+                .into(artistImage);
+    }
     }
 }

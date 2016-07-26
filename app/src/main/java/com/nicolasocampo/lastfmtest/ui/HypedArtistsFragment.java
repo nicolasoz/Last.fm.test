@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by Nicolás on 20/07/2016.
@@ -48,7 +49,6 @@ public class HypedArtistsFragment extends Fragment {
         mHypedArtistsList = (RecyclerView) root.findViewById(R.id.hyped_artist_list);
 
         setupArtistsList();
-        setDummyContent();
         return root;
     }
 
@@ -70,6 +70,8 @@ public class HypedArtistsFragment extends Fragment {
             }
         });
     }
+
+
 
     private void setupArtistsList()
     {

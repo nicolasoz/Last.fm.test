@@ -5,7 +5,7 @@ package com.nicolasocampo.lastfmtest.io;
  */
 public class ApiConstants {
 
-    public static final String API_KEY ="dad203a19b7cb5283c1a8be45cd6c11f";
+    public static final String API_KEY ="e27173f82c66e3ac6b24f246c1fdc37c";
 
     public static final String URL_BASE ="http://ws.audioscrobbler.com";
 
@@ -19,6 +19,6 @@ public class ApiConstants {
     public static final String VALUE_JSON ="json";
 
     //?method=chart.gettopartists&api_key=dad203a19b7cb5283c1a8be45cd6c11f&format=json
-    public static final String URL_HYPED_ARTISTS ="?" +PARAM_METHOD +"="+ VALUE_HYPED_ARTIST_METHOD + "&" + PARAM_API_KEY
+    public static final String URL_HYPED_ARTISTS = PATH_VERSION +"?" +PARAM_METHOD +"="+ VALUE_HYPED_ARTIST_METHOD + "&" + PARAM_API_KEY
             + "=" + API_KEY + "&" + PARAM_FORMAT + "=" + VALUE_JSON;
 }

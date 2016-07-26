@@ -11,23 +11,20 @@ import java.util.ArrayList;
 public class HypedArtistsResponse {
 
     @SerializedName(JsonKeys.ARTISTS_RESULTS)
-    HypedArtistsResults results;
+        HypedArtistsResult result;
 
-    public void setArtist(ArrayList<Artist> artist){
-        this.results.artists= artist;
+
+        public ArrayList<Artist> getArtists(){
+            return result.artists;
+        }
+
+        public void setArtists(ArrayList<Artist> artists){
+        this.result.artists= artists;
     }
 
+        private class HypedArtistsResult{
 
-    public ArrayList<Artist> getArtists(){
-        return results.artists;
-    }
-
-
-    private class HypedArtistsResults {
-
-        @SerializedName(JsonKeys.ARTIST_ARRAY)
-        ArrayList<Artist> artists;
-    }
-
+            ArrayList<Artist> artists;
+        }
 
 }

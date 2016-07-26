@@ -3,6 +3,7 @@ package com.nicolasocampo.lastfmtest.io;
 import com.nicolasocampo.lastfmtest.io.model.HypedArtistsResponse;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.http.GET;
 
 /**
